@@ -1,24 +1,30 @@
 package recipes;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.concurrent.*;
 
 @RestController
 public class RecipeController {
+    @Autowired
+    RecipesRepository recipesRepository;
 
-    private Recipe savedRecipe;
+    @PostMapping("/api/recipe/new")
+    public ResponseEntity<RecipeDTO> postRecipe(@RequestBody Recipe recipe) {
+        var id = recipesRepository.addNewRecipe(recipe);
 
-    @GetMapping("/api/recipe")
-    public ResponseEntity<Recipe> getRecipe() {
-        return new ResponseEntity<>(savedRecipe, HttpStatus.OK);
+        return new ResponseEntity<>(new RecipeDTO(id), HttpStatus.OK);
     }
 
+    @GetMapping("/api/recipe/{id}")
+    public ResponseEntity getRecipe(@PathVariable int id) {
+        var recipe = recipesRepository.getRecipeById(id);
 
-    @PostMapping("/api/recipe")
-    public ResponseEntity<String> postRecipe(@RequestBody Recipe recipe) {
-        savedRecipe = recipe;
-        return new ResponseEntity<>("Recipe " + recipe.name + " has been saved", HttpStatus.OK);
+        if (recipe != null) {
+            return new ResponseEntity<>(recipe, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("No recipe found with id " + id, HttpStatus.NOT_FOUND);
     }
 }

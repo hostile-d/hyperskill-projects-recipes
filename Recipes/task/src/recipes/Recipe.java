@@ -8,6 +8,6 @@ import lombok.*;
 public class Recipe {
     String name;
     String description;
-    String ingredients;
-    String directions;
+    String[] ingredients;
+    String[] directions;
 }
