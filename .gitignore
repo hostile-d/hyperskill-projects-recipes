@@ -9,3 +9,5 @@ course-remote-info.yaml
 /Recipes/Multiple recipes/
 /Recipes/Sort   update/
 /Recipes/Store a recipe/
+Recipes/task/env.properties
+*.db
