@@ -11,3 +11,4 @@ course-remote-info.yaml
 /Recipes/Store a recipe/
 Recipes/task/env.properties
 *.db
+Recipes/task/out

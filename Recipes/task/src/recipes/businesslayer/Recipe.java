@@ -3,6 +3,7 @@ package recipes.businesslayer;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.*;
 
 @Data
 @AllArgsConstructor
@@ -15,8 +16,13 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
+    private LocalDateTime date;
+    @Column
     @NotBlank
     private String name;
+    @Column
+    @NotBlank
+    private String category;
     @Column
     @NotBlank
     private String description;
