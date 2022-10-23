@@ -12,7 +12,7 @@ import java.time.*;
 @Table(name = "recipes")
 public class Recipe {
     @Id
-    @Column
+    @Column(name="recipe_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
@@ -32,4 +32,7 @@ public class Recipe {
     @Column
     @NotEmpty
     private String[] directions;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

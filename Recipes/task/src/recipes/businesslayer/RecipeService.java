@@ -3,7 +3,6 @@ package recipes.businesslayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import recipes.persistence.RecipeRepository;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -20,7 +19,7 @@ public class RecipeService {
         return recipeRepository.findById(id);
     }
 
-    public Recipe save (Recipe recipe) {
+    public Recipe save (Recipe recipe, User user) {
         return recipeRepository.save(new Recipe(
                 recipe.getId(),
                 LocalDateTime.now(),
@@ -28,14 +27,15 @@ public class RecipeService {
                 recipe.getCategory(),
                 recipe.getDescription(),
                 recipe.getIngredients(),
-                recipe.getDirections()
+                recipe.getDirections(),
+                user
         ));
     }
 
     public void delete (Recipe recipe) {
         recipeRepository.delete(recipe);
     }
-    public void update (Long id, Recipe recipe) {
+    public void update (Long id, Recipe recipe, User user) {
         recipeRepository.save(new Recipe(
                 id,
                 LocalDateTime.now(),
@@ -43,7 +43,8 @@ public class RecipeService {
                 recipe.getCategory(),
                 recipe.getDescription(),
                 recipe.getIngredients(),
-                recipe.getDirections()
+                recipe.getDirections(),
+                user
         ));
     }
 
